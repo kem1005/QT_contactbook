@@ -70,3 +70,10 @@ void Widget::on_pushButton_2_clicked()
     Write(mFilename, saveFile);
 }
 
+
+void Widget::on_pushButton_4_clicked()
+{
+    on_pushButton_2_clicked();
+    close();
+}
+

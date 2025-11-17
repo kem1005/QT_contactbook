@@ -3,6 +3,9 @@
 
 #include <QFile>
 #include <QDebug>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QMessageBox>
 QString mFilename ="C:/Users/user/Desktop/ex/txt/myfile.txt";
 
 void Write (QString Filename, QString str)
@@ -68,6 +71,53 @@ void Widget::on_pushButton_2_clicked()
         saveFile+="\n";
     }
     Write(mFilename, saveFile);
+}
+
+
+void Widget::on_pushButton_3_clicked()
+{
+    // 使用檔案對話框選擇要匯入的txt檔案
+    QString fileName = QFileDialog::getOpenFileName(this,
+        QStringLiteral("選擇要匯入的檔案"), 
+        "",
+        QStringLiteral("文字檔案 (*.txt);;所有檔案 (*.*)"));
+    
+    if (fileName.isEmpty()) {
+        return; // 使用者取消選擇
+    }
+    
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, QStringLiteral("錯誤"), 
+            QStringLiteral("無法開啟檔案進行讀取"));
+        return;
+    }
+    
+    QTextStream in(&file);
+    
+    // 清空現有的表格資料
+    ui->tableWidget->setRowCount(0);
+    
+    // 讀取檔案並解析每一行
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(',');
+        
+        // 確保有4個欄位 (學號,班級,姓名,電話)
+        if (fields.size() >= 4) {
+            int row = ui->tableWidget->rowCount();
+            ui->tableWidget->insertRow(row);
+            
+            for (int i = 0; i < 4 && i < fields.size(); i++) {
+                QTableWidgetItem *item = new QTableWidgetItem(fields[i].trimmed());
+                ui->tableWidget->setItem(row, i, item);
+            }
+        }
+    }
+    
+    file.close();
+    QMessageBox::information(this, QStringLiteral("成功"), 
+        QStringLiteral("檔案匯入成功！"));
 }
 
 

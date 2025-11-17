@@ -39,3 +39,15 @@
 
 # debug information files
 *.dwo
+
+# Qt build artifacts
+*.o
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile
+.qmake.stash
+*_plugin_import.cpp
+*_qmlcache.qrc
+QT_contactbook/QT_contactbook
+moc_predefs.h

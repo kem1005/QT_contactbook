@@ -38,7 +38,6 @@ Widget::Widget(QWidget *parent)
         "QWidget#Widget {"
         "   background: qlineargradient(x1:0, y1:0, x2:1, y2:1,"
         "       stop:0 #1a1a2e, stop:0.5 #16213e, stop:1 #0f3460);"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "}"
         
         // 標籤樣式 - 淺色文字帶陰影
@@ -46,7 +45,6 @@ Widget::Widget(QWidget *parent)
         "   color: #e8e8e8;"
         "   font-size: 13px;"
         "   font-weight: bold;"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "   padding: 2px;"
         "}"
         
@@ -58,7 +56,6 @@ Widget::Widget(QWidget *parent)
         "   padding: 8px 12px;"
         "   color: #ffffff;"
         "   font-size: 13px;"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "   selection-background-color: #64b5f6;"
         "}"
         "QLineEdit:focus {"
@@ -80,7 +77,6 @@ Widget::Widget(QWidget *parent)
         "   padding: 12px 28px;"
         "   font-size: 14px;"
         "   font-weight: bold;"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "   min-width: 100px;"
         "}"
         "QPushButton:hover {"
@@ -133,7 +129,6 @@ Widget::Widget(QWidget *parent)
         "   gridline-color: rgba(100, 181, 246, 0.2);"
         "   color: #ffffff;"
         "   font-size: 13px;"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "   selection-background-color: rgba(100, 181, 246, 0.4);"
         "   selection-color: #ffffff;"
         "}"
@@ -157,7 +152,6 @@ Widget::Widget(QWidget *parent)
         "   border: none;"
         "   font-weight: bold;"
         "   font-size: 14px;"
-        "   font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'SimHei', 'WenQuanYi Zen Hei', sans-serif;"
         "}"
         "QHeaderView::section:first {"
         "   border-top-left-radius: 12px;"

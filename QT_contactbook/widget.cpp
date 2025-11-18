@@ -6,7 +6,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-QString mFilename ="C:/Users/user/Desktop/ex/txt/QFileDialoggetSaveFileName.txt";
+QString mFilename ="C:/Users/asus/OneDrive/桌面/QTEX/txt/QFileDialoggetSaveFileName.txt";
 
 void Write (QString Filename, QString str)
 {

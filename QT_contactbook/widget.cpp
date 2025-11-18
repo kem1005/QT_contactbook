@@ -16,6 +16,7 @@ void Write (QString Filename, QString str)
         return;
     }
     QTextStream out(&mFile);
+    out.setCodec("UTF-8"); // 設置 UTF-8 編碼
     out<<str; //將內容輸出至txt檔
     out.flush(); //刷新mFile
     mFile.close(); //關閉mFile
@@ -277,6 +278,7 @@ void Widget::on_pushButton_3_clicked()
     }
     
     QTextStream in(&file);
+    in.setCodec("UTF-8"); // 設置 UTF-8 編碼
     
     // 清空現有的表格資料
     ui->tableWidget->setRowCount(0);

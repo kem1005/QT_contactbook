@@ -6,9 +6,8 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-QString mFilename ="C:/Users/user/Desktop/ex/txt/QFileDialoggetSaveFileName.txt";
 
-void Write (QString Filename, QString str)
+void Widget::Write(QString Filename, QString str)
 {
     QFile mFile (Filename);
     if(!mFile.open(QFile::WriteOnly | QFile::Text)){
@@ -20,9 +19,11 @@ void Write (QString Filename, QString str)
     out.flush(); //刷新mFile
     mFile.close(); //關閉mFile
 }
+
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
+    , mFilename("C:/Users/user/Desktop/ex/txt/QFileDialoggetSaveFileName.txt")
 {
     ui->setupUi(this);
 

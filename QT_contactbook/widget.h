@@ -26,5 +26,7 @@ private slots:
 
 private:
     Ui::Widget *ui;
+    QString mFilename;
+    void Write(QString Filename, QString str);
 };
 #endif // WIDGET_H

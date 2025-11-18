@@ -6,7 +6,6 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-QString mFilename ="C:/Users/user/Desktop/ex/txt/QFileDialoggetSaveFileName.txt";
 
 void Write (QString Filename, QString str)
 {
@@ -123,6 +122,22 @@ Widget::Widget(QWidget *parent)
         "QPushButton#pushButton_4:hover {"
         "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
         "       stop:0 #ef5350, stop:1 #f44336);"
+        "}"
+        "QPushButton#pushButton_5 {"  // 刪除按鈕 - 深紅色
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "       stop:0 #d32f2f, stop:1 #c62828);"
+        "}"
+        "QPushButton#pushButton_5:hover {"
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "       stop:0 #e57373, stop:1 #d32f2f);"
+        "}"
+        "QPushButton#pushButton_6 {"  // 編輯按鈕 - 紫色
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "       stop:0 #ab47bc, stop:1 #8e24aa);"
+        "}"
+        "QPushButton#pushButton_6:hover {"
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "       stop:0 #ba68c8, stop:1 #9c27b0);"
         "}"
         
         // 表格樣式 - 透明背景、交替行顏色、懸停效果
@@ -249,6 +264,16 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_pushButton_2_clicked()
 {
+    // 使用檔案對話框選擇要儲存的位置
+    QString fileName = QFileDialog::getSaveFileName(this,
+        QStringLiteral("儲存聯絡人"), 
+        "",
+        QStringLiteral("文字檔案 (*.txt);;所有檔案 (*.*)"));
+    
+    if (fileName.isEmpty()) {
+        return; // 使用者取消選擇
+    }
+    
     QString saveFile="";
     int rc, cc;
     rc=ui->tableWidget->rowCount();
@@ -259,7 +284,9 @@ void Widget::on_pushButton_2_clicked()
             saveFile += ui->tableWidget->item(i,j)->text()+",";
         saveFile+="\n";
     }
-    Write(mFilename, saveFile);
+    Write(fileName, saveFile);
+    QMessageBox::information(this, QStringLiteral("成功"), 
+        QStringLiteral("檔案匯出成功！"));
 }
 
 
@@ -314,5 +341,60 @@ void Widget::on_pushButton_4_clicked()
 {
     on_pushButton_2_clicked();
     close();
+}
+
+
+void Widget::on_pushButton_5_clicked()
+{
+    // 刪除選中的聯絡人
+    int currentRow = ui->tableWidget->currentRow();
+    
+    if (currentRow < 0) {
+        QMessageBox::warning(this, QStringLiteral("提示"), 
+            QStringLiteral("請先選擇要刪除的聯絡人！"));
+        return;
+    }
+    
+    // 確認刪除
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, QStringLiteral("確認刪除"), 
+        QStringLiteral("確定要刪除選中的聯絡人嗎？"),
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (reply == QMessageBox::Yes) {
+        ui->tableWidget->removeRow(currentRow);
+        QMessageBox::information(this, QStringLiteral("成功"), 
+            QStringLiteral("聯絡人已刪除！"));
+    }
+}
+
+
+void Widget::on_pushButton_6_clicked()
+{
+    // 編輯選中的聯絡人
+    int currentRow = ui->tableWidget->currentRow();
+    
+    if (currentRow < 0) {
+        QMessageBox::warning(this, QStringLiteral("提示"), 
+            QStringLiteral("請先選擇要編輯的聯絡人！"));
+        return;
+    }
+    
+    // 將選中的聯絡人資料填入輸入框
+    QTableWidgetItem *item0 = ui->tableWidget->item(currentRow, 0);
+    QTableWidgetItem *item1 = ui->tableWidget->item(currentRow, 1);
+    QTableWidgetItem *item2 = ui->tableWidget->item(currentRow, 2);
+    QTableWidgetItem *item3 = ui->tableWidget->item(currentRow, 3);
+    
+    if (item0) ui->lineEdit->setText(item0->text());
+    if (item1) ui->lineEdit_2->setText(item1->text());
+    if (item2) ui->lineEdit_3->setText(item2->text());
+    if (item3) ui->lineEdit_4->setText(item3->text());
+    
+    // 刪除原來的行
+    ui->tableWidget->removeRow(currentRow);
+    
+    QMessageBox::information(this, QStringLiteral("提示"), 
+        QStringLiteral("聯絡人資料已載入到輸入框，修改後請點擊「新增」按鈕儲存！"));
 }
 
